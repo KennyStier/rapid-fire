@@ -1,0 +1,81 @@
+#!/bin/bash
+# Rapid Fire - Rapidly send messages
+# Copyright (C) 2014 Kenny Stier
+# This program is free software: you can redistribute it and/or modify it under the
+# terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY 
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+if [[ -z "$1" ]];then
+    echo "ERROR: must specify email address"
+    exit 1
+fi
+
+if [[ $1 = "--edit" ]];then
+	echo "To find your SMTP settings, ask your email administrator."
+    echo "  Now opening ssmtp.conf"
+	sudo xdg-open /etc/ssmtp/ssmtp.conf
+    exit 1
+fi
+
+if [[ $1 = "--help" ]];then
+	echo "Usage:"
+    echo "  rapid-fire [email address] [frequency] [*subject] [*message]"
+    echo ""
+	echo "Variables marked with an *astrisk are optional. The defaults are:"
+	echo "	Subject: Linux Terminal"
+	echo "	Message: Every _ seconds!!!"
+	echo ""
+	echo "To stop the loop, strike Control+C"
+	echo ""
+	echo "Options:"
+	echo "  --edit		Edit Outgoing Email settings"
+	echo "Help Options:"
+	echo "  --help		Show help options"
+	echo "  --help-mobile   	Show cell phone help"
+    exit 1
+fi
+
+if [[ $1 = "--help-mobile" ]];then
+	echo "Enter the below syntax in place of [email address]"
+    echo "  [10 digit cell number]@[carrier suffix]"
+    echo ""
+	echo "Carrier Suffixes:"
+	echo "  AT&T			txt.att.net"
+	echo "  Verizon		vtext.com"
+    exit 1
+fi
+
+if [[ -z "$2" ]];then
+    echo "ERROR: must specify how often to send message"
+    exit 1
+fi
+
+if [[ $2 < 0.01 ]];then
+    echo "ERROR: frequency must be higher than 0.01"
+    exit 1
+fi
+
+if [[ -z "$3" ]];then
+    [[ $3 = "Linux Terminal" ]]
+fi
+
+if [[ -z "$4" ]];then
+    [[ $4 = "Every $2 seconds!!!" ]]
+fi
+
+if [[ -z "$2" ]];then
+    echo "ERROR: must specify how often to send message"
+    exit 1
+fi
+
+# Main Function of Rapid Fire 
+for (( ; ; ))
+do
+   echo $4 | mail -s "$3" $1
+   echo Message Sent to $1 on $(date)
+   sleep $2
+done
