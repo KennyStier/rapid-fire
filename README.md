@@ -1,5 +1,20 @@
-rapid-fire
+Rapid Fire
 ==========
 
 Rapidly send messages via Email
 
+Ever want to get payback for something your friends did?
+Now you can use Rapid Fire to bombard them with emails or text messages!
+Just choose a message, a recipient, and a frequency and Rapid Fire will do the dirty work.
+
+Compatible with Linux :D
+
+To install:
+
+1. Download the script
+2. Configure your outgoing email settings
+3. Run it!
+
+Will have a Debian package and PPA if this project gets 10 stars on GitHub.
+
+DISCLAIMER: I am not responsible for anything that happens due to the use of this evil software.
