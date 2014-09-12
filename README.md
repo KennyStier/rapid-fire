@@ -11,9 +11,11 @@ Compatible with Linux :D
 
 To install:
 
-1. Download the script
+1. Download the script & place in /usr/bin
 2. Configure your outgoing email settings
 3. Run it!
+
+Run rapid-fire --help for info on using Rapid Fire.
 
 Will have a Debian package and PPA if this project gets 10 stars on GitHub.
 
